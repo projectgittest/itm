@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>IT Management</title>
+</head>
+<body>
+<div align="center">
+
+
+    <div sec:authorize="isAuthenticated()">
+        Welcome <b><span sec:authentication="name">Username</span></b>
+        &nbsp;
+        <i><span sec:authentication="principal.authorities">Roles</span></i>
+    </div>
+
+    <h1>IT Management</h1>
+    <h3>Acceptance phase</h3>
+
+    <div sec:authorize="hasAnyAuthority('operator','tech')">
+        <a href="new">Create New Repair</a>
+    </div>
+
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Repair ID</th>
+            <th>Brand</th>
+            <th>Customer Name</th>
+            <th>Customer SurName</th>
+            <th>Date Of Purchase</th>
+            <th>Serial Nr</th>
+            <th>Price</th>
+            <th>Changed</th>
+
+            <th sec:authorize="hasAnyAuthority('operator','tech')">Actions</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="repair : ${listRepairs}">
+            <td th:text="${repair.repair_id}">Repair ID</td>
+            <td th:text="${repair.brand}">Brand</td>
+            <td th:text="${repair.customer_name}">Customer Name</td>
+            <td th:text="${repair.customer_surname}">Customer SurName</td>
+            <td th:text="${repair.dateof_purchase}">Date Of Purchase</td>
+            <td th:text="${repair.serial_nr}">Serial Nr</td>
+            <td th:text="${repair.price}">Price</td>
+            <td th:text="${repair.changed}">Changed</td>
+
+
+            <td sec:authorize="hasAnyAuthority('operator','tech')">
+                <a th:href="@{'/edit/' + ${repair.repair_id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a sec:authorize="hasAnyAuthority('operator','tech')" th:href="@{'/delete/' + ${repair.repair_id}}">Delete</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a sec:authorize="hasAnyAuthority('operator','tech')" th:href="@{'/status/' + ${repair.repair_id}}">Update Status</a>
+
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <form th:action="@{/logout}" method="post" th:align="right">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+</body>
+</html>

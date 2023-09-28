@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Edit Repair</title>
+</head>
+<body>
+<div align="center">
+    <h1>Edit Repair</h1>
+    <br/>
+    <form action="#" th:action="@{/save}" th:object="${repair}" method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Repair ID:</td>
+                <td><input type="text" th:field="*{repair_id}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>Brand:</td>
+                <td><input type="text" th:field="*{brand}" /></td>
+            </tr>
+            <tr>
+                <td>Customer Name:</td>
+                <td><input type="text" th:field="*{customer_name}" /></td>
+            </tr>
+            <tr>
+                <td>Customer Surname:</td>
+                <td><input type="text" th:field="*{customer_surname}" /></td>
+            </tr>
+            <tr>
+                <td>Date of purchase:</td>
+                <td><input type="text" th:field="*{dateof_purchase}" /></td>
+            </tr>
+            <tr>
+                <td>Serial Nr:</td>
+                <td><input type="text" th:field="*{serial_nr}" /></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" th:field="*{price}"  /></td>
+            </tr>
+            <tr>
+                <td>Changed:</td>
+                <td><input type="text" th:field="*{changed}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Save</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
