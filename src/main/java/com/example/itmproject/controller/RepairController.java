@@ -64,6 +64,7 @@ public class RepairController {
 
     @RequestMapping("/new")
     public String showNewProductForm(Model model) {
+        System.out.println("some comment");
         Repair repair = new Repair();
         model.addAttribute("repair", repair);
 
