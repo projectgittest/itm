@@ -55,6 +55,7 @@ public class RepairController {
 
     @RequestMapping("/")
     public String viewHomePage(Model model) {
+        System.out.println("some comment");
         List<Repair> listRepairs = repairService.findAll();
         model.addAttribute("listRepairs", listRepairs);
 
